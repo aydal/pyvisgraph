@@ -1,0 +1,5 @@
+build/*
+dist/*
+pyvisgraph/*.pyc
+mercatorvisv.py
+pyvisgraph.egg-info*
