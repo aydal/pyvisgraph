@@ -27,10 +27,10 @@ from multiprocessing import Pool
 from tqdm import tqdm
 from warnings import warn
 
-from graph import Graph, Edge
-from shortest_path import shortest_path
-from visible_vertices import visible_vertices, point_in_polygon
-from visible_vertices import closest_point
+from pyvisgraph.graph import Graph, Edge
+from pyvisgraph.shortest_path import shortest_path
+from pyvisgraph.visible_vertices import visible_vertices, point_in_polygon
+from pyvisgraph.visible_vertices import closest_point
 
 PYTHON3 = version_info[0] == 3
 if PYTHON3:
@@ -105,7 +105,7 @@ class VisGraph(object):
                                       destination=destination):
                 self.visgraph.add_edge(Edge(p, v))
 
-    def shortest_path(self, origin, destination,weighted_poly):
+    def shortest_path(self, origin, destination):
         """Find and return shortest path between origin and destination.
 
         Will return in-order list of Points of the shortest path found. If
@@ -117,7 +117,7 @@ class VisGraph(object):
         origin_exists = origin in self.visgraph
         dest_exists = destination in self.visgraph
         if origin_exists and dest_exists:
-            return shortest_path(self.visgraph, origin, destination, weighted_poly)
+            return shortest_path(self.visgraph, origin, destination)
         orgn = None if origin_exists else origin
         dest = None if dest_exists else destination
         add_to_visg = Graph([])
@@ -127,7 +127,7 @@ class VisGraph(object):
         if not dest_exists:
             for v in visible_vertices(destination, self.graph, origin=orgn):
                 add_to_visg.add_edge(Edge(destination, v))
-        return shortest_path(self.visgraph, origin, destination, weighted_poly, add_to_visg)
+        return shortest_path(self.visgraph, origin, destination, add_to_visg)
 
     def point_in_polygon(self, point):
         """Return polygon_id if point in a polygon, -1 otherwise."""

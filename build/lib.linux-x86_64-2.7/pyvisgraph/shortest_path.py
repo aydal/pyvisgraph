@@ -22,8 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 from heapq import heapify, heappush, heappop
-from visible_vertices import edge_distance
+from pyvisgraph.visible_vertices import edge_distance
 from shapely.geometry import Polygon, Point, LineString
+
 try:
     dict.iteritems
 except AttributeError:
@@ -70,8 +71,8 @@ def dijkstra(graph, origin, destination, add_to_visgraph, weighted_poly):
     return (D, P)
 
 
-def shortest_path(graph, origin, destination, weighted_poly, add_to_visgraph=None):
-    D, P = dijkstra(graph, origin, destination, add_to_visgraph, weighted_poly)
+def shortest_path(graph, origin, destination, add_to_visgraph=None):
+    D, P = dijkstra(graph, origin, destination, add_to_visgraph)
     path = []
     while 1:
         path.append(destination)

@@ -23,9 +23,9 @@ SOFTWARE.
 """
 from __future__ import division
 from math import pi, sqrt, atan, acos
-from graph import Point
+from pyvisgraph.graph import Point
 
-INF = 1e15
+INF = 10000
 CCW = 1
 CW = -1
 COLLINEAR = 0
